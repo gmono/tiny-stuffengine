@@ -3,6 +3,7 @@ import { delay, list, int, error } from "ts-pystyle";
 import { ComponentBase } from "./Component";
 import { Stuff, StuffBase } from "./Stuff";
 import { List, TimeSpan } from "./Common";
+import { ShapeComponent } from "./components/ShapeComponent";
 export const container = document.querySelector("#app");
 
 export class Context {
@@ -47,46 +48,6 @@ async function renderer() {
       console.log(timespan);
       // console.log(baseContext);
     }
-  }
-}
-
-//具体实现
-/**
- * 支持设置大小
- */
-class ShapeComponent extends ComponentBase<
-  "shape",
-  {
-    setSize(args: { height?: number; width?: number }): void;
-  }
-> {
-  height = 100;
-  width = 100;
-  x = 0;
-  y = 0;
-  name: "shape" = "shape";
-  exports = {
-    setSize: ({ height = 0, width = 0 }) => {
-      if (this._stuff == null) return;
-      this.height = height;
-      this.width = width;
-      this._stuff.element.style.height = height++ + "px";
-      this._stuff.element.style.width = width++ + "px";
-    },
-    getSize: () => {
-      return { height: this.height, width: this.width };
-    },
-    setPosition: ({ x = 0, y = 0 }) => {
-      this.x = x;
-      this.y = y;
-    },
-    getPosition: () => {
-      return { x: this.x, y: this.y };
-    }
-  };
-  render(timespan: TimeSpan): void {
-    // console.log(this.stuff);
-    if (this._stuff == null) return;
   }
 }
 
