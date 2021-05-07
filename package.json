@@ -4,21 +4,14 @@
   "description": "",
   "main": "index.html",
   "scripts": {
-    "start": "parcel index.html --open",
-    "build": "parcel build index.html"
+    "dev":"yarn vite"
   },
   "dependencies": {
     "@tensorflow/tfjs": "2.8.6",
     "dayjs": "1.10.4",
     "mathjs": "9.3.2",
-    "parcel-bundler": "^1.6.1",
-    "ts-pystyle": "1.4.4"
-  },
-  "devDependencies": {
-    "typescript": "4.2.3"
-  },
-  "resolutions": {
-    "@babel/preset-env": "7.13.8"
+    "ts-pystyle": "1.4.4",
+    "vite": "^2.2.4"
   },
   "keywords": []
 }

@@ -15,7 +15,7 @@ class Rect extends Shape {}
 // 即 Shape  -> 圆  方块等
 //具体实现
 /**
- * 支持设置大小
+ * 支持设置大小 当前只支持矩形
  */
 export class ShapeComponent extends ComponentBase<"shape"> {
   height = 100;
