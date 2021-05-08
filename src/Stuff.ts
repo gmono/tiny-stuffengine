@@ -1,6 +1,9 @@
 import { Context, container } from "./index";
-import { Component } from "./Component";
+import { Component, ComponentBase } from "./Component";
 import { List, TimeSpan } from "./Common";
+import { RenderPropsComponent } from "./components/RenderPropsComponent";
+import { ShapeComponent } from "./components/ShapeComponent";
+import { MechanicsComponent } from "./components/SpeedComponent";
 
 /**
  * 代表一个物体
@@ -11,9 +14,9 @@ export interface Stuff extends StuffHooks {
    */
   render(timespan: TimeSpan): void;
   element: HTMLDivElement;
-  components: Map<string, Component>;
+  components: Map<string, Component<any>>;
   //供外部操作的函数
-  attachComponent(comp: Component): void;
+  attachComponent(comp: Component<any>): void;
 }
 /**
  * 预备 :
@@ -27,9 +30,9 @@ export interface Stuff extends StuffHooks {
 abstract class StuffWithRenderer implements Stuff {
   constructor(
     public element: HTMLDivElement,
-    public components: Map<string, Component>
+    public components: Map<string, Component<any>>
   ) {}
-  abstract attachComponent(comp: Component): void;
+  abstract attachComponent(comp: Component<any>): void;
 
   context: Context | null = null;
   /**
@@ -63,12 +66,17 @@ function getElement() {
  * 其他stuff都应该继承自这个类
  */
 export class StuffBase extends StuffWithRenderer {
-  private waitAttatches: List<Component> = [];
+  /**
+   * 用于操作自己的操作集
+   * 
+   */
+  protected Operations=new StuffOperation(this)
+  private waitAttatches: List<Component<any>> = [];
   /**
    * 有待实现 检测是否满足条件 不满足的话就返回false 否则返回true
    * @param comp 组件
    */
-  private isRequirementsOk(comp: Component) {
+  private isRequirementsOk(comp: Component<any>) {
     return true;
   }
   /**
@@ -76,10 +84,10 @@ export class StuffBase extends StuffWithRenderer {
    * 启动一个检查 扫描出等待列表中已经满足的组件
    * @param comp 组件
    */
-  private addWaitingComponent(comp: Component) {
+  private addWaitingComponent(comp: Component<any>) {
     this.waitAttatches.push(comp);
   }
-  attachComponent(comp: Component): void {
+  attachComponent(comp: Component<any>): void {
     //检测是否requirement全部满足 否则放入等待列表
     if (this.isRequirementsOk(comp)) {
       // if (this.context == null) error("此stuff没有初始化");
@@ -99,7 +107,9 @@ export type Name<C> = C extends Component<infer P, any> ? P : never;
 /**
  * 获取export类型
  */
-export type Export<C> = C extends Component<any, infer P> ? P : never;
+export type Export<C extends Component<any,any>> = C extends Component<any, infer P> ? P : never;
+
+//TODO: StuffOperation需要完善 添加更多操作函数
 /**
  * 操作stuff的工具函数集
  */
@@ -110,6 +120,10 @@ export class StuffOperation {
   }
   get Context() {
     return null;
+  }
+
+  get Element(){
+    return this.stuff.element;
   }
   //获取Component
   /**

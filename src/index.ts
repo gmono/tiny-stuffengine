@@ -4,6 +4,7 @@ import { ComponentBase } from "./Component";
 import { Stuff, StuffBase } from "./Stuff";
 import { List, TimeSpan } from "./Common";
 import { ShapeComponent } from "./components/ShapeComponent";
+import { RenderPropsComponent } from "./components/RenderPropsComponent";
 export const container = document.querySelector("#app");
 
 export class Context {
@@ -26,7 +27,7 @@ async function renderer() {
   //启动循环
   //存在： stuff list ，便利list，并调用stuff的render函数 计算时间差并
   //调用render
-
+ 
   let oldtime: dayjs.Dayjs | null = null;
   function getTimeSpan(): TimeSpan {
     if (oldtime == null) {
@@ -89,6 +90,23 @@ class Rotate extends ComponentBase<"rotate", {}> {
   }
 }
 
+class TestStuff extends StuffBase{
+  constructor(){
+    super()
+    this.attachComponent(new RenderPropsComponent());
+    let comp = new ShapeComponent();
+    comp.width = 100
+    comp.height = 100
+    this.attachComponent(comp);
+    ret.attachComponent(new ColorChange());0
+    
+  }
+  render(time:TimeSpan){
+    super.render(time);
+    let prop=this.Operations.getComponent<RenderPropsComponent>("render");
+    prop.setPosition([100,100,100])
+  }
+}
 /**
  * build一个Stuff
  * 创建stuff还可以使用class继承stuffbase

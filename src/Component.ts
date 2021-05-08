@@ -2,7 +2,7 @@ import { Stuff, StuffOperation } from "./Stuff";
 import { Context } from "./index";
 import { List, TimeSpan } from "./Common";
 
-type FunctionMap = { [idx: string]: (arg: object) => any };
+type FunctionMap = { [idx: string]: (...args:any[]) => any };
 
 export interface Component<
   Name extends string,
