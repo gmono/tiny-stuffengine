@@ -1,5 +1,5 @@
 Arguments: 
-  /home/gmono/.config/nvm/versions/node/v14.16.1/bin/node /home/gmono/.config/nvm/versions/node/v14.16.1/bin/yarn
+  /home/gmono/.config/nvm/versions/node/v14.16.1/bin/node /home/gmono/.config/nvm/versions/node/v14.16.1/bin/yarn add @typesfs-extra
 
 PATH: 
   /home/gmono/.config/nvm/versions/node/v14.16.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/sbin:/usr/sbin
@@ -14,7 +14,17 @@ Platform:
   linux x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@tensorflow/tfjs-layers/-/tfjs-layers-2.8.6.tgz: ENOENT: no such file or directory, open '/home/gmono/.cache/yarn/v6/npm-@tensorflow-tfjs-layers-2.8.6-51dec5422fddde289e7915f318676fedeeb6a226-integrity/node_modules/@tensorflow/tfjs-layers/.yarn-tarball.tgz'
+  Error: https://registry.yarnpkg.com/@typesfs-extra: Request "https://registry.yarnpkg.com/@typesfs-extra" returned a 405
+      at Request.params.callback [as _callback] (/home/gmono/.config/nvm/versions/node/v14.16.1/lib/node_modules/yarn/lib/cli.js:66997:18)
+      at Request.self.callback (/home/gmono/.config/nvm/versions/node/v14.16.1/lib/node_modules/yarn/lib/cli.js:140662:22)
+      at Request.emit (events.js:315:20)
+      at Request.<anonymous> (/home/gmono/.config/nvm/versions/node/v14.16.1/lib/node_modules/yarn/lib/cli.js:141634:10)
+      at Request.emit (events.js:315:20)
+      at IncomingMessage.<anonymous> (/home/gmono/.config/nvm/versions/node/v14.16.1/lib/node_modules/yarn/lib/cli.js:141556:12)
+      at Object.onceWrapper (events.js:421:28)
+      at IncomingMessage.emit (events.js:327:22)
+      at endReadableNT (internal/streams/readable.js:1327:12)
+      at processTicksAndRejections (internal/process/task_queues.js:80:21)
 
 npm manifest: 
   {
@@ -23,11 +33,12 @@ npm manifest:
     "description": "",
     "main": "index.html",
     "scripts": {
-      "dev":"yarn vite"
+      "dev": "yarn vite"
     },
     "dependencies": {
       "@tensorflow/tfjs": "2.8.6",
       "dayjs": "1.10.4",
+      "fs-extra": "^10.0.0",
       "mathjs": "9.3.2",
       "ts-pystyle": "1.4.4",
       "vite": "^2.2.4"
@@ -281,6 +292,15 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/fraction.js/-/fraction.js-4.0.13.tgz#3c1c315fa16b35c85fffa95725a36fa729c69dfe"
     integrity sha512-E1fz2Xs9ltlUp+qbiyx9wmt2n9dRzPsS11Jtdb8D2o+cC7wr9xkkKsVKJuBX0ST+LVS+LhLO+SbLJNtfWcJvXA==
   
+  fs-extra@^10.0.0:
+    version "10.0.0"
+    resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-10.0.0.tgz#9ff61b655dde53fb34a82df84bb214ce802e17c1"
+    integrity sha512-C5owb14u9eJwizKGdchcDUQeFtlSHHthBk8pbX9Vc1PFZrLombudjDnNns88aYslCyF6IY5SUw3Roz6xShcEIQ==
+    dependencies:
+      graceful-fs "^4.2.0"
+      jsonfile "^6.0.1"
+      universalify "^2.0.0"
+  
   fsevents@~2.3.1:
     version "2.3.2"
     resolved "https://registry.yarnpkg.com/fsevents/-/fsevents-2.3.2.tgz#8a526f78b8fdf4623b709e0b975c52c24c02fd1a"
@@ -295,6 +315,11 @@ Lockfile:
     version "2.0.5"
     resolved "https://registry.yarnpkg.com/get-caller-file/-/get-caller-file-2.0.5.tgz#4f94412a82db32f36e3b0b9741f8a97feb031f7e"
     integrity sha512-DyFP3BM/3YHTQOCUL/w0OZHR0lpKeGrxotcHWcqNEdnltqFwXVfhEBQ94eIo34AfQpo0rGki4cyIiftY06h2Fg==
+  
+  graceful-fs@^4.1.6, graceful-fs@^4.2.0:
+    version "4.2.6"
+    resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.6.tgz#ff040b2b0853b23c3d31027523706f1885d76bee"
+    integrity sha512-nTnJ528pbqxYanhpDYsi4Rd8MAeaBA67+RZ10CM1m3bTAVFEDcd5AuA4a6W5YkGZ1iNXHzZz8T6TBKLeBuNriQ==
   
   has-flag@^4.0.0:
     version "4.0.0"
@@ -324,6 +349,15 @@ Lockfile:
     version "0.7.1"
     resolved "https://registry.yarnpkg.com/javascript-natural-sort/-/javascript-natural-sort-0.7.1.tgz#f9e2303d4507f6d74355a73664d1440fb5a0ef59"
     integrity sha1-+eIwPUUH9tdDVac2ZNFED7Wg71k=
+  
+  jsonfile@^6.0.1:
+    version "6.1.0"
+    resolved "https://registry.yarnpkg.com/jsonfile/-/jsonfile-6.1.0.tgz#bc55b2634793c679ec6403094eb13698a6ec0aae"
+    integrity sha512-5dgndWOriYSm5cnYaJNhalLNDKOqFwyDB/rr1E9ZsGciGvKPs8R2xYGCacuf3z6K1YKDz182fd+fY3cn3pMqXQ==
+    dependencies:
+      universalify "^2.0.0"
+    optionalDependencies:
+      graceful-fs "^4.1.6"
   
   kleur@^3.0.3:
     version "3.0.3"
@@ -480,6 +514,11 @@ Lockfile:
     version "2.0.0"
     resolved "https://registry.yarnpkg.com/typed-function/-/typed-function-2.0.0.tgz#15ab3825845138a8b1113bd89e60cd6a435739e8"
     integrity sha512-Hhy1Iwo/e4AtLZNK10ewVVcP2UEs408DS35ubP825w/YgSBK1KVLwALvvIG4yX75QJrxjCpcWkzkVRB0BwwYlA==
+  
+  universalify@^2.0.0:
+    version "2.0.0"
+    resolved "https://registry.yarnpkg.com/universalify/-/universalify-2.0.0.tgz#75a4984efedc4b08975c5aeb73f530d02df25717"
+    integrity sha512-hAZsKq7Yy11Zu1DE0OzWjw7nnLZmJZYTDZZyEFHZdUhV8FkH5MCfoU1XMaxXovpyW5nq5scPqq0ZDP9Zyl04oQ==
   
   vite@^2.2.4:
     version "2.2.4"
