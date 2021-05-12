@@ -16,6 +16,7 @@ class Rect extends Shape {}
 //具体实现
 /**
  * 支持设置大小 当前只支持矩形
+ * 之后会考虑用内部添加svg节点来设置形状
  */
 export class ShapeComponent extends ComponentBase<"shape"> {
   height = 100;

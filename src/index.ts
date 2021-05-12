@@ -1,22 +1,15 @@
 import dayjs from "dayjs";
 import { delay, list, int, error } from "ts-pystyle";
 import { ComponentBase } from "./Component";
-import { Stuff, StuffBase } from "./Stuff";
-import { List, TimeSpan } from "./Common";
+import { StuffBase } from "./Stuff";
+import { TimeSpan } from "./Common";
 import { ShapeComponent } from "./components/ShapeComponent";
 import { RenderPropsComponent } from "./components/RenderPropsComponent";
-export const container = document.querySelector("#app");
 
-export class Context {
-  /**
-   * stuff列表
-   */
-  listofStuff: List<Stuff> = [];
-  register(stuff: Stuff) {
-    stuff.beforeRegister != null && stuff.beforeRegister(this);
-    this.listofStuff.push(stuff);
-  }
-}
+
+import * as tf from "@tensorflow/tfjs"
+import { Context } from "./Context";
+tf.setBackend("cpu")
 
 const baseContext = new Context();
 
@@ -46,7 +39,7 @@ async function renderer() {
       //计算帧时间差
       let timespan = getTimeSpan();
       stuff.render(timespan);
-      console.log(timespan);
+      // console.log(timespan);
       // console.log(baseContext);
     }
   }
@@ -62,7 +55,7 @@ class ColorChange extends ComponentBase<"colorchange", {}> {
       Math.random() * 100
     }%,${Math.random()})`;
     this._stuff.element.style.backgroundColor = color;
-    console.log(color);
+    // console.log(color);
     //调用size来设置
     if (this.Stuff && timespan) {
       let exp = this.Stuff.getComponent<ShapeComponent>("shape");
@@ -86,7 +79,7 @@ class Rotate extends ComponentBase<"rotate", {}> {
     else this.now += timespan || 1;
     let color = `rotate(${this.now}deg)`;
     this._stuff.element.style.transform = color;
-    console.log(color);
+    // console.log(color);
   }
 }
 
@@ -98,13 +91,14 @@ class TestStuff extends StuffBase{
     comp.width = 100
     comp.height = 100
     this.attachComponent(comp);
-    ret.attachComponent(new ColorChange());0
+    this.attachComponent(new ColorChange());
     
   }
   render(time:TimeSpan){
     super.render(time);
     let prop=this.Operations.getComponent<RenderPropsComponent>("render");
-    prop.setPosition([100,100,100])
+    prop.setPosition(tf.randomNormal([3],200,10))
+    prop.setRotate(tf.randomNormal([1],180,10).asScalar().arraySync())
   }
 }
 /**
@@ -124,7 +118,8 @@ function TestBuilder(inithw: { height: number; width: number }) {
 }
 
 function main() {
-  baseContext.register(TestBuilder({ height: 100, width: 100 }));
+  // baseContext.register(TestBuilder({ height: 100, width: 100 }));
+  baseContext.register(new TestStuff())
   renderer();
 }
 let temp = document.querySelector("button");

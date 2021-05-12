@@ -1,9 +1,8 @@
-import { Context, container } from "./index";
+import { container } from "./Context";
+import { Context } from "./Context";
 import { Component, ComponentBase } from "./Component";
 import { List, TimeSpan } from "./Common";
-import { RenderPropsComponent } from "./components/RenderPropsComponent";
-import { ShapeComponent } from "./components/ShapeComponent";
-import { MechanicsComponent } from "./components/SpeedComponent";
+
 
 /**
  * 代表一个物体

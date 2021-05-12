@@ -1,5 +1,5 @@
 import { Stuff, StuffOperation } from "./Stuff";
-import { Context } from "./index";
+import { Context } from "./Context";
 import { List, TimeSpan } from "./Common";
 
 type FunctionMap = { [idx: string]: (...args:any[]) => any };
