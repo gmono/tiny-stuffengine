@@ -20,6 +20,9 @@ export class RenderPropsComponent extends ComponentBase<"render"> {
           assert(pos.shape[0]==3)
           this.position=pos;
       },
+      getPosition:()=>{
+        return this.position;
+      },
       setSize:(size:Tensor1D)=>{
         assert(size.shape[0]==2)
         this.size=size;

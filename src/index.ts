@@ -4,11 +4,11 @@ import { ComponentBase } from "./Component";
 import { StuffBase } from "./Stuff";
 import { TimeSpan } from "./Common";
 import { ShapeComponent } from "./components/ShapeComponent";
-import { RenderPropsComponent } from "./components/RenderPropsComponent";
 
 
 import * as tf from "@tensorflow/tfjs"
 import { Context } from "./Context";
+import { TestStuff } from "./tests/TestStuff";
 tf.setBackend("cpu")
 
 const baseContext = new Context();
@@ -45,7 +45,7 @@ async function renderer() {
   }
 }
 
-class ColorChange extends ComponentBase<"colorchange", {}> {
+export class ColorChange extends ComponentBase<"colorchange", {}> {
   exports = {};
   name: "colorchange" = "colorchange";
   render(timespan: TimeSpan): void {
@@ -56,14 +56,6 @@ class ColorChange extends ComponentBase<"colorchange", {}> {
     }%,${Math.random()})`;
     this._stuff.element.style.backgroundColor = color;
     // console.log(color);
-    //调用size来设置
-    if (this.Stuff && timespan) {
-      let exp = this.Stuff.getComponent<ShapeComponent>("shape");
-      let now = exp.getSize();
-      now.height += timespan / 10;
-      now.width += timespan / 10;
-      exp.setSize(now);
-    }
   }
 }
 
@@ -83,24 +75,6 @@ class Rotate extends ComponentBase<"rotate", {}> {
   }
 }
 
-class TestStuff extends StuffBase{
-  constructor(){
-    super()
-    this.attachComponent(new RenderPropsComponent());
-    let comp = new ShapeComponent();
-    comp.width = 100
-    comp.height = 100
-    this.attachComponent(comp);
-    this.attachComponent(new ColorChange());
-    
-  }
-  render(time:TimeSpan){
-    super.render(time);
-    let prop=this.Operations.getComponent<RenderPropsComponent>("render");
-    prop.setPosition(tf.randomNormal([3],200,10))
-    prop.setRotate(tf.randomNormal([1],180,10).asScalar().arraySync())
-  }
-}
 /**
  * build一个Stuff
  * 创建stuff还可以使用class继承stuffbase
@@ -116,11 +90,11 @@ function TestBuilder(inithw: { height: number; width: number }) {
   ret.attachComponent(new Rotate());
   return ret;
 }
-
+renderer();
 function main() {
   // baseContext.register(TestBuilder({ height: 100, width: 100 }));
   baseContext.register(new TestStuff())
-  renderer();
+  
 }
 let temp = document.querySelector("button");
 temp && (temp.onclick = main);
