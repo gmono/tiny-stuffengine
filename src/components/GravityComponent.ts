@@ -53,6 +53,19 @@ import { tensor } from "@tensorflow/tfjs";
      render(timespan: TimeSpan): void {
          // console.log(this.stuff);
          if (this._stuff == null) return;
+         if(this.nowUseGravity!=null){
+             //删除之前应用的重力
+             if(this.Stuff){
+                 let mech=this.Stuff.getComponent<MechanicsComponent>("mechanics");
+                 mech.addF(this.nowUseGravity.mul(-1))
+             }
+             //初始化重力
+             this.nowUseGravity=zeros([3])
+         }
+         else {
+             //如果本来没有重力
+             this.nowUseGravity=zeros([3])
+         }
          //通过context获取所有拥有这个组件的stuff
          if(this.Stuff!=null&&this.Stuff.Context){
              //开始

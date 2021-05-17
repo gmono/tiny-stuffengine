@@ -15,6 +15,11 @@ export interface Component<
    * @param thisContext 当前渲染器用的Context 使用ContextOpteration 可以操作context
    */
   render(timespan: TimeSpan): void;
+  /**
+   * 渲染完成钩子 
+   * @param timespan 过去的时间
+   */
+  renderEnd(timespan:TimeSpan):void;
   props: Map<string, any>;
   name: Name;
   /**
