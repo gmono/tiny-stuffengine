@@ -48,8 +48,8 @@ export class ElasticComponent extends ComponentBase<"elastic"> {
             //计算 v-2t
             let ret=v.sub(t.mul(1+this.elpar)) as Tensor1D;
             assert(ret.rank==1,"计算结果中维度错误 ，请调试:"+ret.rank)
-            ret.print()
-            t.print()
+            // ret.print()
+            // t.print()
             //设为当前速度
             mech.setX(null,ret)
         }
