@@ -51,7 +51,7 @@ export class ElasticComponent extends ComponentBase<"elastic"> {
             // ret.print()
             // t.print()
             //设为当前速度
-            mech.setX(null,ret)
+            mech.setState(null,ret)
         }
        
     }

@@ -16,6 +16,7 @@ export interface Stuff extends StuffHooks {
   components: Map<string, Component<any>>;
   //供外部操作的函数
   attachComponent(comp: Component<any>): void;
+  context:Context|null;
 }
 /**
  * 预备 :
@@ -119,7 +120,7 @@ export class StuffOperation {
     return new Set(this.stuff.components.keys());
   }
   get Context() {
-    return null;
+    return this.stuff.context;
   }
 
   get Element(){

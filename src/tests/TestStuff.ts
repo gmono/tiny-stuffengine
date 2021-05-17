@@ -16,7 +16,7 @@ export class TestStuff extends StuffBase {
     this.attachComponent(new MechanicsComponent())
     this.attachComponent(new ElasticComponent())
     let mech=this.Operations.getComponent<MechanicsComponent>("mechanics")
-    mech.setX(tensor([100,100,100]),zeros([3]),tensor([0,0,0]),tensor([1000,2000,0]))
+    mech.setState(tensor([100,100,100]),zeros([3]),tensor([0,0,0]),tensor([1000,2000,0]))
   }
   render(time: TimeSpan) {
     super.render(time);

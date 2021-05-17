@@ -103,7 +103,14 @@ export class MechanicsComponent extends ComponentBase<"mechanics"> {
     getState:this.getState,
     setF:this.setF,
     addF:this.addF,
-    setX:this.setXState
+    setState:this.setXState,
+    /**
+     * 设置物体的质量
+     * @param m 质量 千克
+     * @returns 无
+     */
+    setM:(m:number)=>this.m=m,
+    getM:()=>this.m
   };
   beforeAttach(stuff: Stuff) {
     super.beforeAttach(stuff);
