@@ -35,9 +35,10 @@ async function renderer() {
   }
   for (;;) {
     await delay(20);
+    let timespan = getTimeSpan();
     for (let stuff of baseContext.listofStuff) {
       //计算帧时间差
-      let timespan = getTimeSpan();
+      await delay(0);
       stuff.render(timespan);
       // console.log(timespan);
       // console.log(baseContext);

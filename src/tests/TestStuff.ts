@@ -6,6 +6,7 @@ import * as tf from "@tensorflow/tfjs";
 import { ColorChange } from "../index";
 import { MechanicsComponent } from "../components/MechanicsComponent";
 import { tensor, zeros } from "@tensorflow/tfjs";
+import { ElasticComponent } from "../components/ElasticComponent";
 
 export class TestStuff extends StuffBase {
   constructor() {
@@ -13,6 +14,7 @@ export class TestStuff extends StuffBase {
     this.attachComponent(new RenderPropsComponent());
     this.attachComponent(new ColorChange());
     this.attachComponent(new MechanicsComponent())
+    this.attachComponent(new ElasticComponent())
     let mech=this.Operations.getComponent<MechanicsComponent>("mechanics")
     mech.setX(tensor([100,100,100]),zeros([3]),tensor([0,0,0]),tensor([0,2000,0]))
   }
@@ -25,8 +27,8 @@ export class TestStuff extends StuffBase {
     // prop.setRotate(tf.randomNormal([1], 180, 10).asScalar().arraySync());
     let pos=rend.getPosition().arraySync() as number[]
     if(pos[1]>500){
-      let mech=this.Operations.getComponent<MechanicsComponent>("mechanics")
-      mech.setX(tensor([mech.getState("Pos").arraySync()[0],500,0]),mech.getState("V").mul([0,-0.85,0]).as1D(),null,null)
+      let el=this.Operations.getComponent<ElasticComponent>("elastic");
+      el.bounce(tf.tensor([0,1,0]))
     }
   }
 }

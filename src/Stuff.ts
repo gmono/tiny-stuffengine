@@ -57,6 +57,7 @@ abstract class StuffWithRenderer implements Stuff {
  */
 function getElement() {
   let ele = document.createElement("div");
+  ele.style.position="absolute"
   container?.appendChild(ele);
   return ele;
 }
