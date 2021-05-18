@@ -12,11 +12,6 @@ export interface Stuff extends StuffHooks {
    * 被渲染器调用的函数 timespan为时间区间
    */
   render(timespan: TimeSpan): void;
-  /**
-   * 渲染完成钩子，在所有的stuff都渲染后调用
-   * @param timespan 整个渲染花费的时间
-   */
-  renderEnd(timespan:TimeSpan):void;
   element: HTMLDivElement;
   components: Map<string, Component<any>>;
   //供外部操作的函数

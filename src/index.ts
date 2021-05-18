@@ -33,16 +33,21 @@ async function renderer() {
       return ret;
     }
   }
+
+
   for (;;) {
-    await delay(20);
+    await delay(60);
     let timespan = getTimeSpan();
-    for (let stuff of baseContext.listofStuff) {
-      //计算帧时间差
-      await delay(0);
-      stuff.render(timespan);
-      // console.log(timespan);
-      // console.log(baseContext);
-    }
+    requestAnimationFrame((e)=>{
+      for (let stuff of baseContext.listofStuff) {
+        //计算帧时间差
+        // await delay(0);
+        stuff.render(timespan);
+        // console.log(timespan);
+        // console.log(baseContext);
+      }
+    })
+
   }
 }
 
@@ -55,7 +60,7 @@ export class ColorChange extends ComponentBase<"colorchange", {}> {
     let color = `hsla(${Math.random() * 360},${Math.random() * 100}%,${
       Math.random() * 100
     }%,${Math.random()})`;
-    this._stuff.element.style.backgroundColor = color;
+    this._stuff.element.style.backgroundColor = "red";
     // console.log(color);
   }
 }
