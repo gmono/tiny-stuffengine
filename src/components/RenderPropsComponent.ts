@@ -18,14 +18,14 @@ export class RenderPropsComponent extends ComponentBase<"render"> {
   exports = {
       setPosition:(pos:Tensor1D)=>{
           assert(pos.shape[0]==3)
-          this.position=pos;
+          this.position=pos.clone();
       },
-      getPosition:()=>{
-        return this.position;
+      getPosition:():Readonly<Tensor1D>=>{
+        return this.position as Tensor1D;
       },
       setSize:(size:Tensor1D)=>{
         assert(size.shape[0]==2)
-        this.size=size;
+        this.size=size.clone();
       },
       /**
        * =rotateZ 2d旋转
@@ -41,7 +41,7 @@ export class RenderPropsComponent extends ComponentBase<"render"> {
        * @param unit 单位
        */
       setAxisRotate:(sizes:Tensor1D,unit:AngleUnit="deg")=>{
-        this.rotate=sizes;
+        this.rotate=sizes.clone();
         this.rotateUnit=unit;
       }
   };
@@ -62,6 +62,7 @@ export class RenderPropsComponent extends ComponentBase<"render"> {
         //大小
         ele.style.height=`${size[0]}px`
         ele.style.width=`${size[1]}px`
+        ele.style.willChange="transform"
         //旋转和位移
         let transform=`translate(${pos[0]}px,${pos[1]}px) rotateX(${rotate[0]}${runit}) rotateY(${rotate[1]}${runit}) rotateZ(${rotate[2]}${runit})`
         

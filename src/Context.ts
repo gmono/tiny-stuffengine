@@ -2,11 +2,11 @@ import { Stuff } from "./Stuff";
 import { List, TimeSpan } from "./Common";
 import type { Component } from "./Component";
 export const container = document.querySelector("#app") as HTMLElement;
+container.style.height="10000px"
+container.style.width="10000px"
+export const controls=document.createElement("div")
+document.body.append(controls)
 //配置app
-container?.addEventListener("scroll",(e)=>{
-  container.style.transform="scale(0.5)"
-})
-
 
 export type RenderEndHandler=(time:TimeSpan)=>Promise<void>;
 export class Context {

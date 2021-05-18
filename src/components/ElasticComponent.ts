@@ -24,7 +24,7 @@ import { MechanicsComponent } from "./MechanicsComponent";
  */
 export class ElasticComponent extends ComponentBase<"elastic"> {
     //弹性系数 1则为完全弹性体  碰撞为完全弹性碰撞
-    elpar = 0.9;
+    elpar = 0.4;
     name: "elastic" = "elastic";
     /**
      * 进行一次弹性操作

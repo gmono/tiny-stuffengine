@@ -7,7 +7,7 @@ import { ShapeComponent } from "./components/ShapeComponent";
 
 
 import * as tf from "@tensorflow/tfjs"
-import { Context } from "./Context";
+import { Context, controls } from "./Context";
 import { TestStuff } from "./tests/TestStuff";
 tf.setBackend("cpu")
 
@@ -33,10 +33,12 @@ async function renderer() {
       return ret;
     }
   }
-
+  let sum=0;
 
   for (;;) {
-    await delay(60);
+    controls.innerText=sum.toString();
+    sum++;
+    await delay(16);
     let timespan = getTimeSpan();
     requestAnimationFrame((e)=>{
       for (let stuff of baseContext.listofStuff) {
@@ -99,8 +101,9 @@ function TestBuilder(inithw: { height: number; width: number }) {
 renderer();
 function main() {
   // baseContext.register(TestBuilder({ height: 100, width: 100 }));
-  baseContext.register(new TestStuff())
-  
+  let n=(Math.random()+0.5)*500
+  baseContext.register(new TestStuff((Math.random()+0.5) * 1e17,[(Math.random()+0.5)*100,0,0],[n,n,0]))
+  baseContext.register(new TestStuff((Math.random()+0.5) * 1e10,[(Math.random()+0.5)*250,0,0],[n,Math.random()*(n+50),0]))
 }
 let temp = document.querySelector("button");
 temp && (temp.onclick = main);
