@@ -102,8 +102,8 @@ renderer();
 function main() {
   // baseContext.register(TestBuilder({ height: 100, width: 100 }));
   let n=(Math.random()+0.5)*500
-  baseContext.register(new TestStuff((Math.random()+0.5) * 1e17,[(Math.random()+0.5)*100,0,0],[n,n,0]))
-  baseContext.register(new TestStuff((Math.random()+0.5) * 1e10,[(Math.random()+0.5)*250,0,0],[n,Math.random()*(n+50),0]))
+  baseContext.register(new TestStuff((Math.random()+0.5) * 1e17,[(Math.random()+0.5)*0,0,0],[n,n,0]))
+  baseContext.register(new TestStuff((Math.random()+0.5) * 1e10,[(Math.random()+0.5)*100,0,0],[n,Math.random()*(n+50),0]))
 }
 let temp = document.querySelector("button");
 temp && (temp.onclick = main);
